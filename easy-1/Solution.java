@@ -4,28 +4,21 @@ public class Solution {
 
     public static List<Integer> gradingStudents(List<Integer> grades) {
 
-        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < grades.size(); i++) {
 
-        for (int grade : grades) {
+            int grade = grades.get(i);
 
-            // Nếu nhỏ hơn 38 thì giữ nguyên
-            if (grade < 38) {
-                result.add(grade);
-                continue;
+            if (grade >= 38) {
+
+                int nextMultiple = ((grade / 5) + 1) * 5;
+
+                if (nextMultiple - grade < 3) {
+                    grades.set(i, nextMultiple);
+                }
             }
-
-            int remainder = grade % 5;
-            int diff = 5 - remainder;
-
-            // Nếu khoảng cách < 3 thì làm tròn
-            if (diff < 3 && remainder != 0) {
-                grade += diff;
-            }
-
-            result.add(grade);
         }
 
-        return result;
+        return grades;
     }
 
     public static void main(String[] args) {
